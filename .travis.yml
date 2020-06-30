@@ -17,8 +17,10 @@ script:
   - |
     # Run test script
       yarn test
+before_deploy: "echo 'ready to deploy?'"
 deploy:
   provider: heroku
   api_key:
     secure: '0889a92b-ab29-4aa7-adaf-3274aef93f1a'
-  on: master
+  app:
+    master: test-ci-88
