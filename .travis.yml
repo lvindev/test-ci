@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+  - '12.13.1'
+sudo: false
+cache:
+  yarn: true
+  directories:
+    - node_modules
+before_install:
+  # Update Node.js modules
+  - |
+    # Prune & rebuild node_modules
+    if [[ -d node_modules ]]; then
+      yarn install
+      yarn prebuild
+    fi
+script:
+  - |
+    # Run test script
+      yarn test
+deploy:
+  provider: heroku
+  api_key:
+    secure: '0889a92b-ab29-4aa7-adaf-3274aef93f1a'
+  on: production
