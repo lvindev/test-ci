@@ -16,7 +16,7 @@ before_install:
 script:
   - |
     # Run test script
-      yarn test
+    yarn test
 before_deploy: "echo 'ready to deploy?'"
 deploy:
   provider: heroku
@@ -24,3 +24,5 @@ deploy:
     secure: '0889a92b-ab29-4aa7-adaf-3274aef93f1a'
   app:
     master: test-ci-88
+  on:
+    condition: node
