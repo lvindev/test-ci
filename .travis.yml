@@ -1,45 +1,38 @@
 language: node_js
-
 node_js:
   - 12.13.1
-
 cache:
   yarn: true
   directories:
     - node_modules
-
 branches:
   only:
     - travis
-
 before_install:
-  # Update Node.js modules
   - |
     # Prune & rebuild node_modules
     if [[ -d node_modules ]]; then
       yarn install
       yarn prebuild
     fi
-
 jobs:
-  stages:
-    - name: deploy
+  include:
+    - stages: build travis
       if: branch = travis
-      include:
-        before_script:
-          - echo 'Before Script!'
-        script:
-          - |
-            # Run test script
-            yarn test:cov
-        after_success:
-          - echo 'After Script!'
-        before_deploy: echo 'Before Deploy!'
-        deploy:
-          provider: heroku
-          api_key:
-            secure: HEROKU_API_KEY
-          app:
-            travis: test-ci-88
-          on:
-            branch: travis
+      before_script:
+        - echo 'Before Script!'
+      script:
+        - |
+          # Run test script
+          yarn test:cov
+      after_success:
+        - echo 'After Script!'
+      before_deploy: echo 'Before Deploy!'
+      deploy:
+        provider: heroku
+        api_key:
+          secure: '$HEROKU_API_KEY'
+        app:
+          travis: test-ci-88
+        on:
+          branch: travis
