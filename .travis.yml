@@ -25,5 +25,4 @@ deploy:
   app:
     master: test-ci-88
   on:
-    tags: true
     all_branches: true
