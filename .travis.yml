@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - '12.13.1'
+  - 12.13.1
 cache:
   yarn: true
   directories:
@@ -16,13 +16,14 @@ before_install:
 script:
   - |
     # Run test script
-    yarn test
-before_deploy: "echo 'ready to deploy?'"
+    yarn test:cov
+before_deploy: echo 'ready to deploy?'
 deploy:
   provider: heroku
   api_key:
-    secure: '0889a92b-ab29-4aa7-adaf-3274aef93f1a'
+    secure: sKb89e57G7uZHCKw+pxn4sep8G3V3/uNKM4oVKqO7AyjPcJqqkQRlvm0HRuhrCtQ02T5RSr5F7HtFb5ZokckFc+936DdhmA1BU7dRHX5SXK4TnRHpq4G6Hso+HavNAp8nFg5i2bGWLeSqN/Am4BWg/K/ZdROR91VYZ2WT3JAjPUdeen+q7NHqul3abr7W0dod4TnE3DN+Kz2VsJudLQHHL/5ilOMrsa+XZQHI8Ogzl9Z918swT2Hd1xN1FxQcInzqufU1bU1NkfIOMg1OogSz8ZrxE1Wceh7OKo3nl4s7tKS3Bfx4uws3eVbnedIt4ez04zYpe8NGPsseaVsTU/XVS96oDMVgH13GL+kEyoeJl1Fsksc+xd0T6Su7RhcMjLAxWbvtCDJTDuvYO2dpP4yEhy7ukHral9VPcblYmVuHYQ+iK/D2IdsFjUGaBQkDpXAITMnJ42ZaIDUP9QX61e2JJdw+bABVl1XJfblftKhKp/lf0k6MVFhKtwXmBvMRikOGcSlzovyPGpv7hc3M0bzuiFX7+Ey+0nNyjzWpNZ5+cPXjlY0kAzXCyuCyfJTScCl4WonOaZfTrIhhp6s3TwfUaJ8aaigzad9e5gG9ebbUVx7LufQK613bu4ZfTDXT+KCn+R3JfSRUCug7uK0asQ1rbgqAfKPqPrvMR/19XTVsN4=
   app:
     master: test-ci-88
   on:
-    condition: node
+    tags: true
+    all_branches: true
