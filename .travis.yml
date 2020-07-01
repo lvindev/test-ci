@@ -1,10 +1,13 @@
 language: node_js
+
 node_js:
   - 12.13.1
+
 cache:
   yarn: true
   directories:
     - node_modules
+
 before_install:
   # Update Node.js modules
   - |
@@ -13,11 +16,20 @@ before_install:
       yarn install
       yarn prebuild
     fi
-script:
-  - |
-    # Run test script
-    yarn test:cov
-before_deploy: echo 'ready to deploy?'
+
+jobs:
+  include:
+    before_script:
+      - echo 'Before Script!'
+    script:
+      - |
+        # Run test script
+        yarn test:cov
+    after_success:
+      - echo 'After Script!'
+
+before_deploy: echo 'Before Deploy!'
+
 deploy:
   provider: heroku
   api_key:
