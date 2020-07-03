@@ -1,0 +1,53 @@
+version: 2.1
+
+commands:
+  build:
+    steps:
+      - checkout
+      - run: yarn install
+      - run: yarn test:cov
+
+executors:
+  test-ci-executor:
+    docker:
+      - image: circleci/node:12.13.1
+
+jobs:
+  test:
+    working_directory: ~/test-ci
+    executor: test-ci-executor
+    steps:
+      - build
+  build:
+    working_directory: ~/test-ci
+    executor: test-ci-executor
+    steps:
+      - build
+  deploy:
+    working_directory: ~/test-ci
+    executor: test-ci-executor
+    steps:
+      - build
+
+workflows:
+  test-build-deploy:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only:
+                - circleci
+      - build:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - circleci
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - circleci
