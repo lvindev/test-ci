@@ -5,6 +5,10 @@
 <a href="https://travis-ci.com/github/gintran/test-ci"><img src="https://travis-ci.com/gintran/test-ci.svg?branch=travis" alt="Travis" /></a>
 <a href="https://travis-ci.com/github/gintran/test-ci"><img src="https://img.shields.io/travis/gintran/test-ci/travis.svg?label=linux" alt="Linux" /></a>
 
+### Circle-CI result
+
+<a href="https://circleci.com/gh/gintran/test-ci/tree/circleci"><img src="https://circleci.com/gh/gintran/test-ci/tree/circleci.svg?style=shield"></a>
+
 ## Installation
 
 ```bash
