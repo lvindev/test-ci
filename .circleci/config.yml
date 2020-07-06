@@ -1,11 +1,23 @@
-version: 2.1
+version: 2
 
 commands:
-  build:
+  test:
     steps:
       - checkout
       - run: yarn install
       - run: yarn test:cov
+  build:
+    steps:
+      - checkout
+      - run: yarn prebuild
+      - run: yarn build
+  deploy:
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
 executors:
   test-ci-executor:
@@ -17,7 +29,7 @@ jobs:
     working_directory: ~/test-ci
     executor: test-ci-executor
     steps:
-      - build
+      - test
   build:
     working_directory: ~/test-ci
     executor: test-ci-executor
@@ -27,9 +39,10 @@ jobs:
     working_directory: ~/test-ci
     executor: test-ci-executor
     steps:
-      - build
+      - deploy
 
 workflows:
+  version: 2
   test-build-deploy:
     jobs:
       - test:
