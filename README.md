@@ -9,6 +9,10 @@
 
 <a href="https://circleci.com/gh/gintran/test-ci/tree/circleci"><img src="https://circleci.com/gh/gintran/test-ci/tree/circleci.svg?style=shield"></a>
 
+### Github Action result
+
+![](https://github.com/gintran/test-ci/workflows/TEST-BUILD-DEPLOY/badge.svg?branch=github-action)
+
 ## Installation
 
 ```bash
